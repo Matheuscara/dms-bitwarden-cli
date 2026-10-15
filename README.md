@@ -61,6 +61,9 @@ The core vault panel uses DMS and the tools listed above. Interactive testing ha
 
 ## Installation
 
+The official catalog submission is [AvengeMedia/dms-plugin-registry#1052](https://github.com/AvengeMedia/dms-plugin-registry/pull/1052).
+It is pending maintainer review; submitting the PR does not make this fork available in the catalog yet.
+
 For a direct installation of this fork:
 
 ```sh
