@@ -1,7 +1,7 @@
 import QtQuick
 Item {
     id: root
-    property string pluginId: "bitwarden"
+    property string pluginId: "bitwardenMatheuscara"
     property var pluginService: null
     readonly property string status: service.status
     readonly property bool colorizeIcon: service.colorizeIcon

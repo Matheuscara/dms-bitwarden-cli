@@ -41,7 +41,7 @@ Item {
 
     Dms.DankPopout {
         id: popup
-        layerNamespace: "dms:bitwarden"
+        layerNamespace: "dms:bitwardenMatheuscara"
         screen: root.targetScreen
         popupWidth: root.contentWidth + Theme.spacingM * 2
         popupHeight: root.contentHeight + Theme.spacingM * 2

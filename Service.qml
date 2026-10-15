@@ -42,7 +42,7 @@ Item {
   // The view that acts when the vault needs the screen; see
   // Model.presenterIndex().
   readonly property string focusedScreen: ""
-  property string pluginId: "bitwarden"
+  property string pluginId: "bitwardenMatheuscara"
   property var pluginService: null
   readonly property var savedSettings: DmsCommon.SettingsData.getPluginSettingsForPlugin(pluginId)
   onSavedSettingsChanged: updateSettings(savedSettings || ({}))
@@ -9293,7 +9293,7 @@ Item {
   // -------------------------------------------------------------------------
 
   IpcHandler {
-    target: "bitwarden"
+    target: "bitwardenMatheuscara"
     enabled: root.live
     function open(): void { root.open() }
     function close(): void { root.close() }

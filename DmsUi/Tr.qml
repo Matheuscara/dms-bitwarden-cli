@@ -5,7 +5,7 @@ import qs.Common
 
 QtObject {
     function text(term) {
-        return I18n.trFor("bitwarden", term || "", "bitwarden");
+        return I18n.trFor("bitwardenMatheuscara", term || "", "bitwardenMatheuscara");
     }
 
     function format(term, ...values) {

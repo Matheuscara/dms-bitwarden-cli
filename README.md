@@ -1,6 +1,6 @@
-# Bitwarden Dankbar
+# Bitwarden Dankbar — Matheuscara
 
-> Version 1.11.6-dms.2: security core ported from upstream 1.11.6. Build all three
+> Version 1.11.6-matheuscara.1: UI-focused fork with the upstream 1.11.6 security core. Build all three
 > helpers after updating: `./scripts/build-helpers.sh`. DMS runs only local builds;
 > a missing or failed vault helper keeps the vault locked.
 
@@ -28,7 +28,7 @@ only. The optional **until screen lock** grant is retained and is revoked by
 DMS screen locking even when automatic vault locking is disabled.
 
 
-A Bitwarden and Vaultwarden plugin for DankMaterialShell, maintained by [coldi1337](https://github.com/coldi1337). Based on [Elevate08/qs-bitwarden-cli](https://github.com/Elevate08/qs-bitwarden-cli) by David Spencer. MIT licensed.
+A Bitwarden and Vaultwarden UI fork for DankMaterialShell, maintained by [Matheuscara](https://github.com/Matheuscara). Based on [coldi1337/dms-bitwarden-cli](https://github.com/coldi1337/dms-bitwarden-cli), originally [Elevate08/qs-bitwarden-cli](https://github.com/Elevate08/qs-bitwarden-cli) by David Spencer. Original MIT copyrights are retained. The shared interface improvements were submitted upstream in [coldi1337/dms-bitwarden-cli#4](https://github.com/coldi1337/dms-bitwarden-cli/pull/4).
 
 Search, copy and manage a Bitwarden or Vaultwarden vault directly in a Quickshell panel. The official `bw` CLI performs vault operations. The plugin supports logins, secure notes, cards, identities, TOTP, folders, organizations, the password generator, Bitwarden Send and an optional SSH agent.
 
@@ -61,28 +61,37 @@ The core vault panel uses DMS and the tools listed above. Interactive testing ha
 
 ## Installation
 
-The plugin is listed in the DMS plugin registry. For a direct installation from this repository:
+For a direct installation of this fork:
 
 ```sh
 mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins"
-git clone --branch main https://github.com/coldi1337/dms-bitwarden-cli.git \
-  "${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwarden"
-"${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwarden/scripts/build-helpers.sh"
+git clone --branch main https://github.com/Matheuscara/dms-bitwarden-cli.git \
+  "${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwardenMatheuscara"
+"${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwardenMatheuscara/scripts/build-helpers.sh"
 dms ipc call plugin-scan scan
-dms ipc call plugins enable bitwarden
+dms ipc call plugins enable bitwardenMatheuscara
 ```
 
-Then add **Bitwarden Dankbar** to your DankBar layout in DMS settings. If the destination already exists, update that installation instead of cloning over it.
+Then add **Bitwarden Dankbar — Matheuscara** to your DankBar layout in DMS settings. If the destination already exists, update that installation instead of cloning over it.
 
 To update a clean installation:
 
 ```sh
-git -C "${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwarden" pull --ff-only
-"${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwarden/scripts/build-helpers.sh"
+git -C "${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwardenMatheuscara" pull --ff-only
+"${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwardenMatheuscara/scripts/build-helpers.sh"
 dms restart
 ```
 
 Restarting DMS loads updated QML imports and locks the plugin's active vault. Your CLI account remains signed in.
+
+### Replacing the original plugin
+
+This is an alternative to the original plugin, not a companion. Disable the
+original `bitwarden` plugin before enabling `bitwardenMatheuscara`; do not run
+both against the same CLI account. This fork has its own DMS settings and IPC
+namespace, but retains the original Bitwarden CLI/keyring/account storage and
+helper protocol. It does not delete account data or migrate DMS preferences
+automatically. Existing credentials stay managed by the official CLI.
 
 ## Sign in and use the vault
 
@@ -161,7 +170,7 @@ PIN unlock is optional and has the offline-guessing limits described above.
 
 Use the settings screen inside the panel, or the **Open Bitwarden settings** button in DMS's plugin settings.
 
-Non-secret preferences are stored through DMS `PluginService`, under the `bitwarden` key in:
+Non-secret preferences are stored through DMS `PluginService`, under the `bitwardenMatheuscara` key in:
 
 ```
 ~/.config/DankMaterialShell/plugin_settings.json
@@ -174,17 +183,17 @@ Vault data and account configuration belong to the official Bitwarden CLI. Sessi
 ## IPC and shortcuts
 
 ```sh
-dms ipc call bitwarden toggle
-dms ipc call bitwarden open
-dms ipc call bitwarden close
-dms ipc call bitwarden settings
-dms ipc call bitwarden lock
-dms ipc call bitwarden sync
-dms ipc call bitwarden status
-dms ipc call bitwarden sshAgentStatus
+dms ipc call bitwardenMatheuscara toggle
+dms ipc call bitwardenMatheuscara open
+dms ipc call bitwardenMatheuscara close
+dms ipc call bitwardenMatheuscara settings
+dms ipc call bitwardenMatheuscara lock
+dms ipc call bitwardenMatheuscara sync
+dms ipc call bitwardenMatheuscara status
+dms ipc call bitwardenMatheuscara sshAgentStatus
 ```
 
-Bind `dms ipc call bitwarden toggle` in your compositor's shortcut configuration. The daemon works even when the bar widget is absent. With a bar present, the panel follows the focused screen's widget.
+Bind `dms ipc call bitwardenMatheuscara toggle` in your compositor's shortcut configuration. The daemon works even when the bar widget is absent. With a bar present, the panel follows the focused screen's widget.
 
 ## Optional SSH agent
 
@@ -208,14 +217,14 @@ python3 demo/render-dms-preview.py
 
 The renderer loads native controls from the installed DMS shell (override its location with `--dms-dir`) and uses a temporary copy of the UI with inert service stubs and writes `docs/screenshots/dms-vault-preview.png`. It does not open your live vault or restart DMS.
 
-For a development checkout, link the repository into DMS instead of cloning into its plugin directory. Run this from the checkout, with no existing `bitwarden` installation at the destination:
+For a development checkout, link the repository into DMS instead of cloning into its plugin directory. Run this from the checkout, with no existing `bitwardenMatheuscara` installation at the destination:
 
 ```sh
 mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins"
-ln -s "$PWD" "${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwarden"
-"${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwarden/scripts/build-helpers.sh"
+ln -s "$PWD" "${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwardenMatheuscara"
+"${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins/bitwardenMatheuscara/scripts/build-helpers.sh"
 dms ipc call plugin-scan scan
-dms ipc call plugins enable bitwarden
+dms ipc call plugins enable bitwardenMatheuscara
 ```
 
 Run the automated checks with Rust/Cargo, Node.js and Qt 6's `qmltestrunner` installed:
@@ -237,7 +246,7 @@ The runner builds the SSH helper with its locked Cargo dependencies, runs the No
 Reload after ordinary edits:
 
 ```sh
-dms ipc call plugin-scan reload bitwarden
+dms ipc call plugin-scan reload bitwardenMatheuscara
 ```
 
 DMS reloads the entry component with a cache-busting URL, but imported QML/JavaScript may remain cached. After changing imported controls or the model, restart DMS to load the complete new version. Reloading/removing the daemon locks its active vault; the CLI account stays signed in.
@@ -247,10 +256,10 @@ DMS reloads the entry component with a cache-busting URL, but imported QML/JavaS
 Turn off PIN/fingerprint storage or log out in the panel first if you want to remove its stored credentials. Then disable the plugin:
 
 ```sh
-dms ipc call plugins disable bitwarden
+dms ipc call plugins disable bitwardenMatheuscara
 ```
 
-Remove its DankBar widget and the `bitwarden` folder from `${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins`. For a development installation, remove only the symlink to keep your checkout. Run `dms ipc call plugin-scan scan` afterward.
+Remove its DankBar widget and the `bitwardenMatheuscara` folder from `${XDG_CONFIG_HOME:-$HOME/.config}/DankMaterialShell/plugins`. For a development installation, remove only the symlink to keep your checkout. Run `dms ipc call plugin-scan scan` afterward.
 
 Removing the plugin folder does not remove the official CLI's account data.
 

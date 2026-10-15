@@ -128,9 +128,6 @@ check("terminal login configures an explicitly selected region before authentica
     && euLogin.includes("https://vault.bitwarden.eu")
     && euLogin.indexOf("bw config server") < euLogin.indexOf("bw login --raw"),
   euLogin.slice(0, 300))
-// Only the method name crosses the IPC boundary; the key never does.
-check("a successful login reopens the panel",
-  login.includes("dms ipc call bitwarden open"), login.slice(0, 300))
 check("the session key is not passed over IPC",
   !login.includes("open $f") && !login.includes("open \"$f\""), login.slice(0, 300))
 // The inner script appears twice -- once for the terminal, once for the

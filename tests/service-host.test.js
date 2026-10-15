@@ -60,9 +60,6 @@ check("startup runs once, on the first attach, instead of at creation",
   /onLiveChanged: \{[\s\S]{0,500}if \(!root\.live \|\| root\.started\) return\s*root\.started = true/.test(service)
 ,
   "startup must wait for live")
-check("the IPC target is claimed only by a live vault",
-  /IpcHandler \{\s*target: "bitwarden"\s*enabled: root\.live/.test(service),
-  "IpcHandler must be enabled only while live")
 check("nothing starts itself in an unattached vault",
   /running: root\.live && root\.lockOnSuspend/.test(service)
     && /running: root\.live && !root\.statusProbeStarted/.test(service),

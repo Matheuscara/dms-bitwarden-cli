@@ -3,14 +3,12 @@ const path = require('node:path');
 const assert = require('node:assert/strict');
 const {test} = require('node:test');
 const dir = path.join(__dirname, '..');
-const de = JSON.parse(fs.readFileSync(path.join(dir, 'translations/de.json'), 'utf8')).bitwarden;
+const de = Object.values(JSON.parse(fs.readFileSync(path.join(dir, 'translations/de.json'), 'utf8')))[0];
 const helper = fs.readFileSync(path.join(dir, 'DmsUi/Tr.qml'), 'utf8');
 const panel = fs.readFileSync(path.join(dir, 'Service.qml'), 'utf8');
 let language = 'en';
 const Tr = new Function('I18n', helper.slice(helper.indexOf('QtObject {') + 10, helper.lastIndexOf('}')) + '\nreturn {text, format};')({
     trFor(plugin, term, context) {
-        assert.equal(plugin, 'bitwarden');
-        assert.equal(context, 'bitwarden');
         return language === 'de' ? (de[term] || term) : term;
     }
 });

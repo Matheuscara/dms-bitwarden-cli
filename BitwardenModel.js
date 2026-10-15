@@ -985,7 +985,7 @@ function terminalLoginCommand(mode, serverUrl, slot) {
     + "if bw " + verb + " --raw > \"$f\" && [ -s \"$f\" ]; then "
     // Bring the panel back itself rather than making the user find it again.
     // Only the method name crosses this boundary; the key never does.
-    + "dms ipc call bitwarden open >/dev/null 2>&1 || true; "
+    + "dms ipc call bitwardenMatheuscara open >/dev/null 2>&1 || true; "
     + "echo; echo 'Done. Returning to the Bitwarden panel...'; sleep 1; "
     + "else rm -f \"$f\"; echo; echo 'Not completed -- nothing was handed to the panel.'; "
     + "read -p 'Press enter to close...'; fi"

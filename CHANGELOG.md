@@ -1,12 +1,14 @@
 # Changelog
 
-## [Unreleased]
+## [1.11.6-matheuscara.1] - 2026-10-15
 
 ### Changed
 
 - Keep vault branding, account and item count separate from a labeled wrapping action toolbar.
 - Give virtualized vault rows more vertical space and reserve compact quick-action width only while actions are visible.
 - Present folder, organization and type filters as equal-width cards with independently elided labels and values.
+- Publish the Matheuscara fork with its own `bitwardenMatheuscara` DMS/settings/IPC identity; preserve original authorship and link the UI contribution upstream.
+- Document that this replaces, rather than runs alongside, the original plugin; retain the existing CLI/keyring data and helper protocol.
 
 ### Fixed
 
